@@ -9,7 +9,7 @@ This is a full-stack web application for managing a collection of recipes. Users
 - Node.js and npm
 
   Clone the repository:
-  
+
   git clone https://github.com/Samuel202093/nextjs-recipe-app.git
 
   cd nextjs-recipe-app
@@ -33,6 +33,12 @@ This is a full-stack web application for managing a collection of recipes. Users
   - SWR
 
   - Axios
+
+  - Vitest
+
+   ## Testing of the application
+
+   npm test
 
   ## Deployment of the application
 

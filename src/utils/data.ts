@@ -1,1 +1,1 @@
-export const url: string = 'https://recipe-task-app-server.vercel.app'
+export const url: string = "https://recipe-task-app-server.vercel.app";

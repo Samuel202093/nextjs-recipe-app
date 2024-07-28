@@ -2,12 +2,33 @@
 import React from "react";
 import { FcViewDetails } from "react-icons/fc";
 import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 import recipeImg from "../../../public/images/pizza-img.jpg";
 import { RecipeProps } from "@/interface/interface";
 import Link from "next/link";
+import { url } from "../../utils/data";
+import axios from "axios";
 
 const Item: React.FC<RecipeProps> = ({ recipe }) => {
   const { _id, title, imageUrl, ingredients, instructions } = recipe;
+
+  const handleDelete = () => {
+    const userConfirm = window.confirm("Are you sure you want to delete");
+    if (userConfirm) {
+      axios
+        .delete(`${url}/${_id}`)
+        .then((res) => {
+          if (res.status === 204) {
+            alert("Recipe deleted successfully");
+          }
+        })
+        .catch((error) =>
+          alert("Failed to delete recipe due to network error")
+        );
+    } else {
+      alert(`cancel deleting recipe`);
+    }
+  };
 
   return (
     <>
@@ -46,6 +67,11 @@ const Item: React.FC<RecipeProps> = ({ recipe }) => {
             <Link href={`/edit/${_id}`}>
               <FaRegEdit className="flex self-endy font-semibold text-xl cursor-pointer text-blue-800" />
             </Link>
+
+            <MdDeleteForever
+              className="text-xl text-red-600 font-semibold cursor-pointer"
+              onClick={() => handleDelete()}
+            />
           </span>
         </div>
       </div>

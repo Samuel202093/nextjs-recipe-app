@@ -39,6 +39,7 @@ export default function Create(){
     if (!formData.title) newErrors.title = 'Title is required';
     if (!formData.ingredients) newErrors.ingredients = 'Ingredients is required';
     if (!formData.instructions) newErrors.instructions = 'Instructions is required';
+    setLoading(false)
 
     return newErrors;
   };

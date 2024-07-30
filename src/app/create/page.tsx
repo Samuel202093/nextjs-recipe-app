@@ -54,9 +54,8 @@ export default function Create() {
     recipeData.append("title", formData.title);
     recipeData.append("ingredients", formData.ingredients);
     recipeData.append("instructions", formData.instructions);
-    if (formData.image) {
-      recipeData.append("image", formData.image);
-    }
+    if (formData.image)  recipeData.append("image", formData.image);
+
 
     try {
       const response = await axios.post(`${url}/api/recipes`, formData, {

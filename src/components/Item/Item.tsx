@@ -12,14 +12,17 @@ import axios from "axios";
 const Item: React.FC<RecipeProps> = ({ recipe }) => {
   const { _id, title, imageUrl, ingredients, instructions } = recipe;
 
+
+
   const handleDelete = () => {
     const userConfirm = window.confirm("Are you sure you want to delete");
     if (userConfirm) {
-      axios
-        .delete(`${url}/${_id}`)
-        .then((res) => {
+     const response =  axios
+        .delete(`${url}/api/recipes/${_id}`)
+        response.then((res) => {
           if (res.status === 204) {
             alert("Recipe deleted successfully");
+            window.location.reload();
           }
         })
         .catch((error) =>
@@ -59,7 +62,7 @@ const Item: React.FC<RecipeProps> = ({ recipe }) => {
           <span className="text-sm text-[rgba(0,0,0,0.7)] font-semibold">
             {ingredients}
           </span>
-          <p className="text-sm text-[rgba(0,0,0,0.7)]">{instructions}</p>
+          <p className="text-sm text-[rgba(0,0,0,0.7)]">{instructions.slice(0,100)}</p>
           <span className="flex flex-row gap-4">
             <Link href={`/recipe/${_id}`}>
               <FcViewDetails className="flex self-endy font-semibold text-2xl cursor-pointer" />

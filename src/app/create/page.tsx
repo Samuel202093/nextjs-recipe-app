@@ -13,7 +13,7 @@ export default function Create() {
     title: "",
     ingredients: "",
     instructions: "",
-    image: null,
+    image: null as File | null,
   });
 
   const handleChange = (
@@ -23,12 +23,8 @@ export default function Create() {
   };
 
   const handleFormImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    if (file) {
-      const fileURL = URL.createObjectURL(file);
-      setFormData({ ...formData, image: fileURL });
-    } else {
-      setFormData({ ...formData, image: null });
+    if (e.target.files && e.target.files[0]) {
+      setFormData({ ...formData, image: e.target.files[0] });
     }
   };
 
@@ -58,21 +54,19 @@ export default function Create() {
     recipeData.append("title", formData.title);
     recipeData.append("ingredients", formData.ingredients);
     recipeData.append("instructions", formData.instructions);
-    if (formData.image) recipeData.append("image", formData.image);
+    if (formData.image) {
+      recipeData.append("image", formData.image);
+    }
 
     try {
-      const res = await axios({
-        method: "POST",
-        url: `${url}/api/recipes`,
-        data: recipeData,
+      const response = await axios.post(`${url}/api/recipes`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      if (res.status === 201) {
+      if (response.status === 201) {
         setLoading(false);
-        alert("Recipe was created successfully");
+        alert("recipe submitted successfully");
         setFormData({
           title: "",
           ingredients: "",
@@ -80,9 +74,6 @@ export default function Create() {
           image: null,
         });
         router.push("/");
-      } else {
-        alert("Error submitting recipe");
-        setLoading(false);
       }
     } catch (error) {
       alert(error);

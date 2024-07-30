@@ -40,12 +40,14 @@ export default function RecipeDetails() {
   }
 
   if (data) {
+    const { title, ingredients, instructions, imageUrl } = data.recipe;
+
     return (
       <div className="recipeContainer flex flex-col gap-2 w-[30%] min-h-[15vh] border-2 rounded-md p-4 mx-auto mt-[2rem]">
         <div className="border-[1px]y border-blacky w-[60%] mx-auto min-h-[20vh] rounded-md">
-          {data.recipe?.image ? (
+          {imageUrl != null ? (
             <img
-              src={data.recipe.image}
+              src={imageUrl}
               alt="recipe-img"
               className="w-full object-contain border-2y border-red-600y h-fit rounded-md"
             />
@@ -60,14 +62,12 @@ export default function RecipeDetails() {
 
         <div className="flex flex-col gap-2">
           <h1 className="text-[rgba(0,0,0,0.7)] font-semibold text-center">
-            {data.recipe.title}
+            {title}
           </h1>
           <span className="text-sm text-[rgba(0,0,0,0.7)] font-semibold">
-            {data.recipe.ingredients}
+            {ingredients}
           </span>
-          <p className="text-sm text-[rgba(0,0,0,0.7)]">
-            {data.recipe.instructions}
-          </p>
+          <p className="text-sm text-[rgba(0,0,0,0.7)]">{instructions}</p>
         </div>
       </div>
     );

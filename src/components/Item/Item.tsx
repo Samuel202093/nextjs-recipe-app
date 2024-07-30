@@ -40,7 +40,7 @@ const Item: React.FC<RecipeProps> = ({ recipe }) => {
         key={recipe._id}
       >
         <div className="border-[1px]y border-blacky w-[60%] mx-auto min-h-[20vh] rounded-md">
-          {imageUrl ? (
+          {imageUrl != null ? (
             <img
               src={imageUrl}
               alt="recipe-img"

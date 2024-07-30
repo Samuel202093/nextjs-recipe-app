@@ -23,3 +23,10 @@ export interface RecipeType {
 export interface RecipeProps {
   recipe: RecipeType;
 }
+
+export interface FormDataType {
+  title: string;
+  ingredients: string;
+  instructions: string;
+  image: FileList ;
+}
